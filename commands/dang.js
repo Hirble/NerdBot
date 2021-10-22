@@ -1,9 +1,9 @@
 module.exports = {
   name: 'dang',
   description: 'sadges people',
-  execute(message, args) {
+  execute(client, message) {
     if (message.author.username != "Kuru") {
-      message.react('765695829410316300')
+      message.channel.send('<:sadge:759279448074879027>')
     } else {
       message.channel.send("Made you Look")
     }

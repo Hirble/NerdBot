@@ -1,7 +1,8 @@
 module.exports = {
     name: 'roulette',
     description: 'might shoot you',
-    execute(message, args) {
+    cooldown: 10,
+    execute(client, message) {
         function getRandomInt(max){
             return Math.floor(Math.random() * max);
         }
@@ -12,7 +13,6 @@ module.exports = {
         }
         else{
             message.channel.send("**[CLICK]** you lived this time, feel free to try again")
-            console.log(chamber)
         }
     }
   }
