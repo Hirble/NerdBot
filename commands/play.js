@@ -23,11 +23,16 @@ const videoPlayer = async (guild, song) => {
 const skipSong = (message, songQueue) => {
   if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute command.');
   if (!songQueue) return message.channel.send(`There are no songs in queue`);
+  if (!songQueue.connection.dispatcher) return message.channel.send("I've been corrupted please kill me while I'm still myself");
+  
   songQueue.connection.dispatcher.end();
 }
 
 const stopPlaying = (message, songQueue) => {
   if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute command.');
+  if (!songQueue) return message.channel.send("what queue lmao");
+  if (!songQueue.connection.dispatcher) return message.channel.send("I've been corrupted please kill me while I'm still myself");
+  
   songQueue.songs = []
   songQueue.connection.dispatcher.end();
 }
@@ -36,9 +41,9 @@ const listQueue = (message, songQueue) => {
   if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute command.');
   if (!songQueue) return message.channel.send("what queue lmao");
   if (!songQueue.connection.dispatcher) return message.channel.send("I've been corrupted please kill me while I'm still myself");
+  
   const songList = songQueue.songs;
   let listTemplate = '```Currently queued songs: \n'
-
 
   listTemplate += `now playing: ${songList[0].title} \n`
   for (let i = 1; i < songList.length; i++) {
