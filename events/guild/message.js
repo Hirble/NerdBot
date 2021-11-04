@@ -1,5 +1,3 @@
-const { MessageManager } = require("discord.js");
-
 const cooldowns = new Map();
 
 module.exports = (Discord, client, message) => {
