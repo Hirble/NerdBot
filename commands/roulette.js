@@ -11,24 +11,35 @@ const spinCylinder = (message) => {
 }
 
 const resDead = (message, args, client) => {
-    console.log(args)
+    const stringArg = args.join(' ')
     let deadRole = message.guild.roles.cache.find(role => {
         return role.name === "Graveyard"
     })
-    //console.log(message.guild.members.cache[0].user.username)
-    console.log(client.users.cache.find(user => {
-        return user.tag === args
-    }))
-   // let newDead = message.guild.members.cache.get(message.author.id)
+    let userId = client.users.cache.find(user => {
+        return user.username == stringArg
+    }).id
+    let newRes = message.guild.members.cache.get(userId)
 
-   // newDead.roles.add(deadRole)
+    newRes.roles.remove(deadRole)
+}
 
+const massRes = (message) => {
+    let deadRole = message.guild.roles.cache.find(role => {
+        return role.name === "Graveyard"
+    })
+    let deadCount = message.guild.roles.cache.find(role => {
+        return role.name === "Graveyard"
+    }).members
+
+    deadCount.forEach(grave => {
+        grave.roles.remove(deadRole)
+    });
 }
 
 
 module.exports = {
     name: 'roulette',
-    aliases: ['spin', 'res'],
+    aliases: ['spin', 'res', 'bigres'],
     description: 'might shoot you',
     cooldown: 0,
     execute(client, message, cmd, args) {
@@ -68,5 +79,6 @@ module.exports = {
         }
         else if (cmd === 'spin') spinCylinder(message)
         else if (cmd === 'res') resDead(message, args, client)
+        else if (cmd === 'bigres') massRes(message)
     }
 }
