@@ -31,23 +31,23 @@ const factorPrimes = (message, args) => {
   // the current number, so we don't add a random "*"
   let numBefore = false;
 
-  let message = "";
+  let output = "";
 
   // create the string to return
   for (let i = 0; i < primeNums.length(); ++i) {
     if (primeNumsUsed[i] != 0 && numBefore) {
-      message += " * " + primeNums[i] + "^" + primeNumsUsed[i];
+      output += " * " + primeNums[i] + "^" + primeNumsUsed[i];
       continue;
     }
     else if (primeNumsUsed[i] != 0) {
-      message += primeNums[i] + "^" + primeNumsUsed[i];
+      output += primeNums[i] + "^" + primeNumsUsed[i];
       numBefore = true;
       continue;
     }
   }
 
   // return answer
-  return message.channel.send('The unique prime factorization is: ' + message);
+  return message.channel.send('The unique prime factorization is: ' + output);
 }
 
 
