@@ -24,16 +24,10 @@ const resDead = (message, args, client) => {
 }
 
 const massRes = (message) => {
-    let deadRole = message.guild.roles.cache.find(role => {
-        return role.name === "Graveyard"
-    })
-    let deadCount = message.guild.roles.cache.find(role => {
-        return role.name === "Graveyard"
-    }).members
+    let deadRole = message.guild.roles.cache.find(role => role.name === "Graveyard")
+    let deadCount = message.guild.roles.cache.find(role => role.name === "Graveyard").members
 
-    deadCount.forEach(grave => {
-        grave.roles.remove(deadRole)
-    });
+    deadCount.forEach(grave => grave.roles.remove(deadRole));
 }
 
 
