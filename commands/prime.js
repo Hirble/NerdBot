@@ -56,7 +56,7 @@ module.exports = {
   name: 'primefactor',
   description: 'finds the numbers unique prime representation',
   cooldown: 0,
-  elecute(client, message, cmd, args) {
+  execute(client, message, cmd, args) {
 
     factorPrimes(message, args);
 
