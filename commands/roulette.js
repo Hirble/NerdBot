@@ -1,7 +1,7 @@
 let remainChamber = 6
 
 const spinCylinder = (message) => {
-    if (remainChamber > 3) {
+    if (remainChamber > 1) {
         return message.channel.send("these odds aren't even that bad just pull the trigger")
     }
     else {
@@ -21,6 +21,7 @@ const resDead = (message, args, client) => {
     let newRes = message.guild.members.cache.get(userId)
 
     newRes.roles.remove(deadRole)
+    message.channel.send('✧･ﾟ: *✧･ﾟ:* ***ZOP*** ✧･ﾟ: *✧･ﾟ:*\n I cast alive ur mans IV')
 }
 
 const massRes = (message) => {
@@ -28,6 +29,7 @@ const massRes = (message) => {
     let deadCount = message.guild.roles.cache.find(role => role.name === "Graveyard").members
 
     deadCount.forEach(grave => grave.roles.remove(deadRole));
+    message.channel.send("just stop being dead??????")
 }
 
 
@@ -35,11 +37,13 @@ module.exports = {
     name: 'roulette',
     aliases: ['spin', 'res', 'bigres'],
     description: 'might shoot you',
-    cooldown: 0,
+    cooldown: 15,
     execute(client, message, cmd, args) {
-
-
-        if (cmd === 'roulette') {
+        if (message.channel.id == 905963181812355072){
+            return message.channel.send("ghosts have no rights")
+        }
+            
+        else if (cmd === 'roulette') {
             function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
             }
