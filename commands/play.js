@@ -23,6 +23,10 @@ const videoPlayer = async (guild, song) => {
 const skipSong = (message, songQueue) => {
   if (!message.member.voice.channel) return message.channel.send('You need to be in a channel to execute command.');
   if (!songQueue) return message.channel.send(`There are no songs in queue`);
+  if (!songQueue.connection.dispatcher && songQueue.length >=1) {
+    console.log(songQueue);
+    
+  }
   if (!songQueue.connection.dispatcher) return message.channel.send("I've been corrupted please kill me while I'm still myself");
   
   songQueue.connection.dispatcher.end();
