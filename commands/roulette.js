@@ -1,9 +1,13 @@
 let remainChamber = 6
 
 const spinCylinder = (message) => {
-    if (remainChamber > 1) {
-        return message.channel.send("these odds aren't even that bad just pull the trigger")
+    if (remainChamber > 1 && message.author.username != "cosy") {
+        return message.channel.send("no bitching out unless it's the last chamber")
     }
+    else if(remainChamber > 1){
+        return message.channel.send("*Cosy tips his hat down as he smirks, unholstering his weapon and loading in a single bullet*")
+    }
+
     else {
         remainChamber = 6
         return message.channel.send('alway rember wen u wer 2 scare to pull the fuckign trigger <:Rember:363188112056254474> \n (gave the cylinder a good spin)')
