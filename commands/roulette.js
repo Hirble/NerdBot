@@ -1,4 +1,5 @@
-let remainChamber = 6
+let remainChamber = 6;
+let deadArr = new Map()
 
 const spinCylinder = (message) => {
     if (remainChamber > 1 && message.author.username != "cosy") {
@@ -29,30 +30,36 @@ const resDead = (message, args, client) => {
 }
 
 const massRes = (message) => {
-    let deadRole = message.guild.roles.cache.find(role => role.name === "Graveyard")
-    let deadCount = message.guild.roles.cache.find(role => role.name === "Graveyard").members
+    let deadRole = message.guild.roles.cache.find(role => {
+        return role.name === "Graveyard"
+    })
 
-    deadCount.forEach(grave => grave.roles.remove(deadRole));
-    message.channel.send("just stop being dead??????")
+   console.log(deadArr.size)
+   
+   deadArr.forEach(async grave =>  await grave.roles.remove(deadRole));
+   message.channel.send("just stop being dead??????")
 }
-
 
 module.exports = {
     name: 'roulette',
     aliases: ['spin', 'res', 'bigres'],
     description: 'might shoot you',
-    cooldown: 15,
-    execute(client, message, cmd, args) {
-        if (message.channel.id == 905963181812355072){
-            return message.channel.send("ghosts have no rights")
+    cooldown: 0,
+    async execute(client, message, cmd, args) {
+        if (message.channel.id == 905963181812355072) return message.channel.send("ghosts have no rights")
+        console.log(deadArr.size)
+        if (deadArr.size == 0) {
+            deadArr = await message.guild.roles.cache.find(role => {
+                return role.name === "Graveyard"
+            }).members
         }
-            
-        else if (cmd === 'roulette') {
+        console.log(deadArr)
+        if (cmd === 'roulette') {
             function getRandomInt(max) {
                 return Math.floor(Math.random() * max);
             }
             chamber = getRandomInt(remainChamber)
-            // chamber = 5
+            // chamber = 0
             console.log(chamber);
             if (chamber === 0) {
                 message.channel.send("https://cdn.discordapp.com/attachments/360103749844336640/897063405070987264/Alakablam.mp4")
@@ -61,8 +68,10 @@ module.exports = {
                 let deadRole = message.guild.roles.cache.find(role => {
                     return role.name === "Graveyard"
                 })
-                let newDead = message.guild.members.cache.get(message.author.id)
+                let newDead = message.guild.members.cache.get(message.author.id);
 
+                //take back control, don't be a sheep
+                deadArr.set(message.author.id, newDead)
                 newDead.roles.add(deadRole)
                 remainChamber = 6
             }
