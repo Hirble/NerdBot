@@ -8,7 +8,9 @@ const spinCylinder = (message) => {
         })
     }
     else if(remainChamber > 1){
-        return message.channel.send("*Cosy tips his hat down as he smirks, unholstering his weapon and loading in a single bullet*")
+        return message.channel.send("*Cosy tips his hat down as he smirks, unholstering his weapon and loading in a single bullet*").then(msg => {
+            msg.delete({ timeout: 7000 })
+        })
     }
 
     else {
