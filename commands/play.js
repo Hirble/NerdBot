@@ -97,7 +97,7 @@ module.exports = {
             url: video.url
           }
         } else {
-          message.channel.send(`Couldn't find your stinky video.`)
+          return message.channel.send(`Couldn't find your stinky video.`)
         }
       }
 
@@ -117,7 +117,7 @@ module.exports = {
           newQueue.connection = connection;
           videoPlayer(message.guild, newQueue.songs[0])
         } catch (err) {
-          queue.delete(message.quild.id);
+          queue.delete(message.guild.id);
           message.channel.send('Connection Error');
           throw err;
         }
