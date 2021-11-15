@@ -96,6 +96,7 @@ module.exports = {
                 }
                 else {
                     message.channel.send("**[CLICK]** hmph.")
+                    msg.delete({ timeout: 7000 })
                 }
                 if (remainChamber > 1) {
                     message.channel.send(`${remainChamber} chamber(s) remaining <:monakS:520414023737540617>`).then(msg => {
